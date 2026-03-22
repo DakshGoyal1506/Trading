@@ -64,6 +64,19 @@ def test_order_limit_price_required():
         )
 
 
+def test_order_zero_quantity_rejected():
+    with pytest.raises(ValueError):
+        Order(
+            order_id="2",
+            instrument_id="INFY_NSE",
+            timestamp=datetime(2024, 1, 1, 0, 0, 0),
+            side="BUY",
+            order_type="MARKET",
+            quantity=0,
+            status="PENDING",
+        )
+
+
 def test_backtest_run_dates():
     run = BacktestRun(
         run_id="run_001",
@@ -76,3 +89,14 @@ def test_backtest_run_dates():
         initial_capital=1000000,
     )
     assert run.strategy_name == "trend"
+
+
+def test_target_position_schema():
+    obj = TargetPosition(
+        instrument_id="INFY_NSE",
+        target_weight=0.05,
+        target_units=None,
+        timestamp=datetime(2024, 1, 10, 0, 0, 0),
+        strategy_name="trend",
+    )
+    assert obj.target_weight == 0.05

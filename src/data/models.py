@@ -11,10 +11,12 @@ class Instrument(BaseModel):
     instrument_id: str = Field(..., description="Unique identifier for the instrument", min_length=1)
     symbol: str = Field(..., description="Trading symbol of the instrument", min_length=1)
     exchange: str = Field(..., description="Exchange where the instrument is traded", min_length=1)
-    asset_class: Literal["equity", "eft", "index", "option", "future", "currency", "commodity", "crypto"] = Field(default="equity", description="Asset class of the instrument")
+    asset_class: Literal["equity", "etf", "index", "option", "future", "currency", "commodity", "crypto"] = Field(
+        default="equity", description="Asset class of the instrument"
+    )
     currency: str = Field(default="INR", description="Currency of the instrument")
     tick_size: float = Field(default=0.05, description="Minimum price movement of the instrument", gt=0)
-    lot_size: int = Field(default=1, description="Minimum trading quantity of the instrument", gt=1)
+    lot_size: int = Field(default=1, description="Minimum trading quantity of the instrument", ge=1)
     is_active: bool = Field(default=True, description="Whether the instrument is currently active for trading")
 
     @field_validator("currency", "exchange", mode="before")

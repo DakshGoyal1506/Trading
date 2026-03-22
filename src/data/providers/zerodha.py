@@ -70,6 +70,8 @@ class ZerodhaProvider(HistoricalDataProvider):
         response.raise_for_status()
 
         df = pd.read_csv(StringIO(response.text))
+
+        # Canonical meaning: instrument_id is the stable broker instrument token.
         if "instrument_token" in df.columns:
             df["instrument_id"] = df["instrument_token"].astype(str)
         else:
@@ -79,18 +81,13 @@ class ZerodhaProvider(HistoricalDataProvider):
         return df
 
     def get_daily_bars(self, instrument_id: str, start_date: date, end_date: date) -> pd.DataFrame:
-        # Here instrument_id is treated as a trading symbol (e.g., "INFY").
-        symbol = instrument_id
+        """Fetch daily bars for a Zerodha instrument.
 
-        instruments = self.get_instruments()
-        row = instruments[
-            (instruments["tradingsymbol"] == symbol) & (instruments["exchange"] == "NSE")
-        ]
+        Contract: instrument_id == Zerodha instrument_token (string).
+        The caller is responsible for resolving symbol -> instrument_id using the instrument master.
+        """
 
-        if row.empty:
-            raise ValueError(f"instrument token not found for symbol={symbol}")
-
-        instrument_token = str(row.iloc[0]["instrument_token"])
+        instrument_token = str(instrument_id)
 
         params = {
             "from": f"{start_date.isoformat()} 00:00:00",
@@ -121,7 +118,7 @@ class ZerodhaProvider(HistoricalDataProvider):
                     "close": candle[4],
                     "adj_close": pd.NA,
                     "volume": candle[5],
-                    "symbol": symbol,
+                    "symbol": pd.NA,
                     "data_source": self.provider_name(),
                 }
             )

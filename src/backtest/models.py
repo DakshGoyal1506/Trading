@@ -11,7 +11,7 @@ class Signal(BaseModel):
     signal_id: str = Field(..., description="Unique identifier for the signal", min_length=1)
     instrument_id: str = Field(..., description="Unique identifier for the instrument", min_length=1)
     timestamp: datetime = Field(..., description="Timestamp of the signal")
-    stratergy_name: str = Field(..., description="Name of the strategy that generated the signal", min_length=1)
+    strategy_name: str = Field(..., description="Name of the strategy that generated the signal", min_length=1)
     direction: Literal["LONG", "SHORT", "FLAT"] = Field(..., description="Side of the signal")
     score: Optional[float] = Field(default=None, description="Confidence level of the signal (0 to 1)")
     notes: Optional[str] = Field(default=None, description="Additional details about the signal")
@@ -20,10 +20,12 @@ class TargetPosition(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
 
     instrument_id: str = Field(..., description="Unique identifier for the instrument", min_length=1)
-    target_quantity: int = Field(..., description="Target quantity for the position", ge=0)
-    target_price: Optional[float] = Field(default=None, description="Target price for the position", gt=0)
+    target_weight: float = Field(..., description="Target portfolio weight for the instrument", ge=-1.0, le=1.0)
+    target_units: Optional[int] = Field(
+        default=None, description="Optional target position units (shares/contracts)", ge=0
+    )
     timestamp: datetime = Field(..., description="Timestamp of the target position")
-    stratergy_name: str = Field(..., description="Name of the strategy that generated the signal", min_length=1)
+    strategy_name: str = Field(..., description="Name of the strategy that generated the target", min_length=1)
 
 class BacktestRun(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
