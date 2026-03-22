@@ -111,6 +111,7 @@ class ZerodhaProvider(HistoricalDataProvider):
         for candle in candles:
             rows.append(
                 {
+                    "instrument_id": instrument_token,
                     "timestamp": pd.to_datetime(candle[0]),
                     "open": candle[1],
                     "high": candle[2],
