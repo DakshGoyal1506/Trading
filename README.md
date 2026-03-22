@@ -34,6 +34,9 @@ Details:
 - OMS schemas: `src/oms/README.md`
 - Backtest schemas: `src/backtest/README.md`
 
+'''
+pytest -q
+'''
 ---
 
 ## Documentation
