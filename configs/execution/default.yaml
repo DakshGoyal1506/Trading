@@ -1,0 +1,3 @@
+commission_bps: 5
+slippage_bps: 10
+default_order_type: MARKET

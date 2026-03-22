@@ -1,6 +1,0 @@
-# Day 1 placeholder — Day 4 will implement ingestion using this
-provider: yahoo  # one run = one declared provider
-frequency: 1d
-market: nse_equities
-universe:
-  symbols: []  # e.g., ["RELIANCE.NS", "TCS.NS"]

@@ -28,10 +28,17 @@ data/artifacts/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/artifacts/.gitkeep
+!data/reference/.gitkeep
 
 # Reports (keep folders, ignore contents)
-reports/**
-!reports/.gitkeep
+reports/backtests/*
+reports/risk/*
+reports/tca/*
+reports/paper/*
+!reports/backtests/.gitkeep
+!reports/risk/.gitkeep
+!reports/tca/.gitkeep
+!reports/paper/.gitkeep
 
 # Notebooks outputs
 .notebooks/

@@ -1,0 +1,7 @@
+market: indian_equities
+timeframe: 1d
+primary_provider: yahoo
+secondary_provider: zerodha
+universe: nifty50
+storage_format: parquet
+timezone: Asia/Kolkata

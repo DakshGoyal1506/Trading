@@ -1,2 +1,11 @@
 # Day 1: keep minimal; Day 2+ will add pydantic/pandas/etc as needed
-
+pandas
+numpy
+pyarrow
+pydantic
+pyyaml
+pytest
+yfinance
+requests
+python-dotenv
+jupyter

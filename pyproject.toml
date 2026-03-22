@@ -1,5 +1,5 @@
 [project]
-name = "quant-trading-stack"
+name = "Trading"
 version = "0.1.0"
 description = "Event-driven quant trading research/backtest/paper stack"
 requires-python = ">=3.11"

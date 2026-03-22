@@ -1,0 +1,3 @@
+broker: zerodha
+mode: paper
+reconcile_on_start: true
